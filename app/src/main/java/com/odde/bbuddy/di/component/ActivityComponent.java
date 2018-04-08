@@ -4,6 +4,7 @@ import com.odde.bbuddy.authentication.view.AuthenticateActivity;
 import com.odde.bbuddy.account.view.AccountsActivity;
 import com.odde.bbuddy.account.view.AddAccountActivity;
 import com.odde.bbuddy.account.view.EditDeleteAccountActivity;
+import com.odde.bbuddy.budget.AddBudgetActivity;
 import com.odde.bbuddy.di.module.activity.ActivityModule;
 import com.odde.bbuddy.di.module.activity.RobobindingModule;
 import com.odde.bbuddy.di.scope.ActivityScope;
@@ -17,4 +18,6 @@ public interface ActivityComponent {
     void inject(AccountsActivity accountsActivity);
     void inject(EditDeleteAccountActivity editDeleteAccountActivity);
     void inject(AuthenticateActivity authenticateActivity);
+
+    void inject(AddBudgetActivity addBudgetActivity);
 }
