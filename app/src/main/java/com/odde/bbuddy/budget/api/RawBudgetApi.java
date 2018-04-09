@@ -2,9 +2,12 @@ package com.odde.bbuddy.budget.api;
 
 import com.odde.bbuddy.budget.viewmodel.Budget;
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RawBudgetApi {
@@ -14,9 +17,9 @@ public interface RawBudgetApi {
 
     @POST(BUDGET)
     Call<ResponseBody> addBudget(@Body Budget budget);
-//
-//    @GET(BUDGET)
-//    Call<List<Budget>> getAllAccounts();
+
+    @GET(BUDGET)
+    Call<List<Budget>> getAllBudgets();
 //
 //    @PUT(ACCOUNTS_WITH_ID)
 //    Call<ResponseBody> editAccount(@Path("id") int accountId, @Body Budget account);

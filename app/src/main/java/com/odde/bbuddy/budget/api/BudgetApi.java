@@ -3,6 +3,9 @@ package com.odde.bbuddy.budget.api;
 import android.support.annotation.NonNull;
 
 import com.odde.bbuddy.budget.viewmodel.Budget;
+import com.odde.bbuddy.common.functional.Consumer;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -17,20 +20,20 @@ public class BudgetApi {
         this.rawBudgetApi = rawBudgetApi;
     }
 
-    //    public void processAllAccounts(final Consumer<List<Budget>> consumer) {
-//        rawBudgetApi.getAllAccounts().enqueue(new Callback<List<Budget>>() {
-//            @Override
-//            public void onResponse(Call<List<Budget>> call, Response<List<Budget>> response) {
-//                consumer.accept(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Budget>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-//
+    public void processAllBudgets(final Consumer<List<Budget>> consumer) {
+        rawBudgetApi.getAllBudgets().enqueue(new Callback<List<Budget>>() {
+            @Override
+            public void onResponse(Call<List<Budget>> call, Response<List<Budget>> response) {
+                consumer.accept(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Budget>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void addBudget(Budget budget, final Runnable afterSuccess) {
         rawBudgetApi.addBudget(budget).enqueue(callbackOfAfterSuccess(afterSuccess));
     }
