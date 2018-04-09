@@ -22,6 +22,25 @@ import dagger.Lazy;
 @PresentationModel
 @ActivityScope
 public class PresentableBudgets implements HasPresentationModelChangeSupport {
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    private String startDate;
+
+    private String endDate;
 
     //    private final Lazy<PresentationModelChangeSupport> changeSupportLazyLoader;
     private final BudgetApi budgetApi;
@@ -63,5 +82,9 @@ public class PresentableBudgets implements HasPresentationModelChangeSupport {
                 presentationModelChangeSupport.refreshPresentationModel();
             }
         });
+    }
+
+    public void getResult(){
+        
     }
 }

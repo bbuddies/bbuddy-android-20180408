@@ -6,6 +6,7 @@ import com.odde.bbuddy.account.view.AddAccountActivity;
 import com.odde.bbuddy.account.view.EditDeleteAccountActivity;
 import com.odde.bbuddy.budget.AddBudgetActivity;
 import com.odde.bbuddy.budget.BudgetsActivity;
+import com.odde.bbuddy.dashboard.view.DashboardActivity;
 import com.odde.bbuddy.di.module.activity.ActivityModule;
 import com.odde.bbuddy.di.module.activity.RobobindingModule;
 import com.odde.bbuddy.di.scope.ActivityScope;
@@ -23,4 +24,6 @@ public interface ActivityComponent {
     void inject(AddBudgetActivity addBudgetActivity);
 
     void inject(BudgetsActivity activity);
+
+    void inject(DashboardActivity dashboardActivity);
 }
