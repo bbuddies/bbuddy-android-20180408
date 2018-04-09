@@ -2,11 +2,7 @@ package com.odde.bbuddy.budget.api;
 
 import android.support.annotation.NonNull;
 
-import com.odde.bbuddy.account.viewmodel.Account;
 import com.odde.bbuddy.budget.viewmodel.Budget;
-import com.odde.bbuddy.common.functional.Consumer;
-
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -21,7 +17,7 @@ public class BudgetApi {
         this.rawBudgetApi = rawBudgetApi;
     }
 
-//    public void processAllAccounts(final Consumer<List<Budget>> consumer) {
+    //    public void processAllAccounts(final Consumer<List<Budget>> consumer) {
 //        rawBudgetApi.getAllAccounts().enqueue(new Callback<List<Budget>>() {
 //            @Override
 //            public void onResponse(Call<List<Budget>> call, Response<List<Budget>> response) {
@@ -36,7 +32,7 @@ public class BudgetApi {
 //    }
 //
     public void addBudget(Budget budget, final Runnable afterSuccess) {
-//        rawBudgetApi.addAccount(budget).enqueue(callbackOfAfterSuccess(afterSuccess));
+        rawBudgetApi.addBudget(budget).enqueue(callbackOfAfterSuccess(afterSuccess));
     }
 //
 //    public void editAccount(Budget account, final Runnable afterSuccess) {

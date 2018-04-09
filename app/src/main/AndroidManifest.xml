@@ -11,19 +11,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <mActivity
+        <activity
             android:name=".authentication.view.AuthenticateActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </mActivity>
-        <mActivity android:name=".account.view.AddAccountActivity" />
-        <mActivity android:name=".budget.AddBudgetActivity" />
+        </activity>
+        <activity android:name=".account.view.AddAccountActivity" />
+        <activity android:name=".budget.AddBudgetActivity" />
 
-        <mActivity android:name=".account.view.EditDeleteAccountActivity" />
-        <mActivity android:name=".MainActivity" />
+        <activity android:name=".account.view.EditDeleteAccountActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

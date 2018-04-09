@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="month"
-
+            bind:text="${month}"
             android:inputType="textCapWords"
             android:id="@+id/month"
         />
@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="amount"
+            bind:text="${amount}"
             android:inputType="number"
             android:id="@+id/amount"
            />
