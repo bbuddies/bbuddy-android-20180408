@@ -3,6 +3,8 @@ package com.odde.bbuddy.di.module.application;
 import com.odde.bbuddy.account.api.AccountsApi;
 import com.odde.bbuddy.account.api.RawAccountsApi;
 import com.odde.bbuddy.authentication.model.AuthenticationToken;
+import com.odde.bbuddy.budget.api.BudgetApi;
+import com.odde.bbuddy.budget.api.RawBudgetApi;
 import com.odde.bbuddy.common.ApiFactory;
 
 import javax.inject.Singleton;
@@ -25,4 +27,10 @@ public class ApiModule {
         return new AccountsApi(apiFactory.create(RawAccountsApi.class));
     }
 
+
+    @Provides
+    @Singleton
+    public BudgetApi provideBudget(ApiFactory apiFactory) {
+        return new BudgetApi(apiFactory.create(RawBudgetApi.class));
+    }
 }
