@@ -98,7 +98,7 @@ public class PresentableBudgets implements HasPresentationModelChangeSupport {
     }
 
     public void calculateResult() {
-        result = calculate()+"";
+        result = calculate() + "";
         presentationModelChangeSupport.refreshPresentationModel();
     }
 
@@ -114,21 +114,22 @@ public class PresentableBudgets implements HasPresentationModelChangeSupport {
 
         for (Budget budget : allBudgets) {
             LocalDate date = new LocalDate(budget.getMonth());
-            if (date.getMonthOfYear() > startDay.getMonthOfYear()
-                    && date.getMonthOfYear() < endDay.getMonthOfYear()) {
+            if ((date.getYear() == startDay.getYear() && date.getMonthOfYear() > startDay.getMonthOfYear()) &&
+                    (date.getYear() == endDay.getYear() && date.getMonthOfYear() < endDay.getMonthOfYear())) {
                 summary = summary + budget.getAmount();
             } else if (endDay.getYear() == startDay.getYear() &&
+                    endDay.getYear() == date.getYear() &&
                     endDay.getMonthOfYear() == startDay.getMonthOfYear() &&
                     endDay.getMonthOfYear() == date.getMonthOfYear()) {
                 int value = budget.getAmount() * (endDay.getDayOfMonth() - startDay.getDayOfMonth() + 1)
                         / getDaysOfMonth(startDay);
                 summary += (value);
-            } else if (date.getMonthOfYear() == startDay.getMonthOfYear()) {
+            } else if (date.getYear() == startDay.getYear() && date.getMonthOfYear() == startDay.getMonthOfYear()) {
                 int value = budget.getAmount() * (getDaysOfMonth(startDay) - startDay.getDayOfMonth() + 1)
                         / getDaysOfMonth(startDay);
                 summary += (value);
-            } else if (date.getMonthOfYear() == endDay.getMonthOfYear()) {
-                int value = budget.getAmount() * (getDaysOfMonth(endDay) - endDay.getDayOfMonth() + 1)
+            } else if (date.getYear() == endDay.getYear() && date.getMonthOfYear() == endDay.getMonthOfYear()) {
+                int value = budget.getAmount() * endDay.getDayOfMonth()
                         / getDaysOfMonth(endDay);
                 summary += (value);
             }
