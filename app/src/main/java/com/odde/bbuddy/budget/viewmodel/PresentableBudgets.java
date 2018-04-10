@@ -5,7 +5,6 @@ import com.odde.bbuddy.budget.api.BudgetApi;
 import com.odde.bbuddy.common.functional.Consumer;
 import com.odde.bbuddy.di.scope.ActivityScope;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.robobinding.annotation.ItemPresentationModel;
 import org.robobinding.annotation.PresentationModel;
@@ -13,7 +12,6 @@ import org.robobinding.presentationmodel.HasPresentationModelChangeSupport;
 import org.robobinding.presentationmodel.PresentationModelChangeSupport;
 import org.robobinding.widget.adapterview.ItemClickEvent;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,46 +102,17 @@ public class PresentableBudgets implements HasPresentationModelChangeSupport {
 
 
     public int calculate() {
+        return calculate(new Period(new LocalDate(this.startDate), new LocalDate(this.endDate)));
+    }
+
+    private int calculate(final Period period) {
         int summary = 0;
 
-        LocalDate startDay = new LocalDate(this.startDate);
-        LocalDate endDay = new LocalDate(this.endDate);
-
-        if (startDay.isAfter(endDay))
-            return 0;
-
         for (Budget budget : allBudgets) {
-            LocalDate date = new LocalDate(budget.getMonth());
-            if ((date.getYear() == startDay.getYear() && date.getMonthOfYear() > startDay.getMonthOfYear()) &&
-                    (date.getYear() == endDay.getYear() && date.getMonthOfYear() < endDay.getMonthOfYear())) {
-                summary = summary + budget.getAmount();
-            } else if (endDay.getYear() == startDay.getYear() &&
-                    endDay.getYear() == date.getYear() &&
-                    endDay.getMonthOfYear() == startDay.getMonthOfYear() &&
-                    endDay.getMonthOfYear() == date.getMonthOfYear()) {
-                int value = budget.getAmount() * (endDay.getDayOfMonth() - startDay.getDayOfMonth() + 1)
-                        / getDaysOfMonth(startDay);
-                summary += (value);
-            } else if (date.getYear() == startDay.getYear() && date.getMonthOfYear() == startDay.getMonthOfYear()) {
-                int value = budget.getAmount() * (getDaysOfMonth(startDay) - startDay.getDayOfMonth() + 1)
-                        / getDaysOfMonth(startDay);
-                summary += (value);
-            } else if (date.getYear() == endDay.getYear() && date.getMonthOfYear() == endDay.getMonthOfYear()) {
-                int value = budget.getAmount() * endDay.getDayOfMonth()
-                        / getDaysOfMonth(endDay);
-                summary += (value);
-            }
-
+            summary += budget.getOverlappingAmount(period);
         }
 
         return summary;
-    }
-
-    public int getDaysOfMonth(LocalDate localDate) {
-        DateTime dateTime = new DateTime(localDate.getYear(),
-                localDate.getMonthOfYear(), 14, 12,
-                0, 0, 000);
-        return dateTime.dayOfMonth().getMaximumValue();
     }
 
 }
